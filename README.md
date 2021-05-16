@@ -26,6 +26,7 @@ A request arrives at our load balancer that checks the header and/or path to red
 
 ## Folder Structure
 
+```
 ├── src
 │   ├── app.py - Simple Flask application that will run in each of our servers
 │   ├── loadbalancer.py - Load balancer that will distribute traffic to the appropriate server
@@ -38,3 +39,4 @@ A request arrives at our load balancer that checks the header and/or path to red
 ├── docker-compose.yml - Starts our HTTP servers for the load balancer
 ├── requirements.txt
 └── .gitignore
+```
