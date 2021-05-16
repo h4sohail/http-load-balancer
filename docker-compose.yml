@@ -1,0 +1,26 @@
+version: "3"
+services:
+  dashboard1:
+    image: server
+    environment: 
+      - APP=dashboard
+    ports:
+      - "8081:5000"
+  dashboard2:
+    image: server
+    environment: 
+      - APP=dashboard
+    ports:
+      - "8082:5000"
+  store1:
+    image: server
+    environment: 
+      - APP=dashboard
+    ports:
+      - "9081:5000"
+  store2:
+    image: server
+    environment: 
+      - APP=dashboard
+    ports:
+      - "9082:5000"

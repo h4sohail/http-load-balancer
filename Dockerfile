@@ -1,7 +1,7 @@
 FROM python:3
 
-RUN pip -r requirements.txt
+COPY . .
 
-COPY ./src/app.py /src/app.py
+RUN pip install -r requirements.txt
 
 CMD ["python", "/src/app.py"]
