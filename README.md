@@ -20,9 +20,9 @@ $ make test
 ```
 
 ## Architecture
-
+We pretend we have services "Service A" and "Service B", each of these service is running on two servers.  
 We use docker-compose to spin up some Flask applications (these could be API servers, or any other resource servers).  
-A request arrives at our load balancer that checks the header and/or path to redirect it to the appropriate Flask application.
+A request arrives at our load balancer that checks the header and/or path to redirect it to the appropriate Flask application.  
 
 ## Folder Structure
 
