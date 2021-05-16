@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-  return f"This is the {os.enviorn["APP"]} application"
+  return f"This is the {os.environ['APP']} application"
 
 
 if __name__ == "__main__":
