@@ -15,12 +15,12 @@ services:
   store1:
     image: server
     environment: 
-      - APP=dashboard
+      - APP=store
     ports:
       - "9081:5000"
   store2:
     image: server
     environment: 
-      - APP=dashboard
+      - APP=store
     ports:
       - "9082:5000"
