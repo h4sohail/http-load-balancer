@@ -1,26 +1,26 @@
 version: "3"
 services:
-  dashboard1:
+  dogs_1:
     image: server
     environment: 
-      - APP=dashboard
+      - APP=dogs
     ports:
       - "8081:5000"
-  dashboard2:
+  dogs_2:
     image: server
     environment: 
-      - APP=dashboard
+      - APP=dogs
     ports:
       - "8082:5000"
-  store1:
+  cats_1:
     image: server
     environment: 
-      - APP=store
+      - APP=cats
     ports:
       - "9081:5000"
-  store2:
+  cats_2:
     image: server
     environment: 
-      - APP=store
+      - APP=cats
     ports:
       - "9082:5000"
