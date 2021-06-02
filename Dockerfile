@@ -4,4 +4,4 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-CMD ["python", "/src/mock_api.py"]
+CMD ["python", "/tests/fixtures/mock_api.py"]
