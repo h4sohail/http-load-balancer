@@ -1,5 +1,6 @@
 import pytest
 
+from http import HTTPStatus
 from src.loadbalancer import loadbalancer
 
 
@@ -9,17 +10,17 @@ def client():
     yield client
 
 
-def test_path_routing_dogs(client):
-  result = client.get("/dogs")
+def test_host_routing_dogs(client):
+  result = client.get("/", headers={"Host": "www.service-a.com"})
   assert b"This is the dogs application" in result.data
 
-  
-def test_path_routing_cats(client):
-  result = client.get("/cats")
+
+def test_host_routing_cats(client):
+  result = client.get("/", headers={"Host": "www.service-b.com"})
   assert b"This is the cats application" in result.data
 
 
-def test_path_routing_service_notfound(client):
-  result = client.get("/not-a-service")
+def test_host_routing_notfound(client):
+  result = client.get("/", headers={"Host": "www.not-a-service.com"})
   assert b"Not Found" in result.data
-  assert 404 == result.status_code
+  assert HTTPStatus.NOT_FOUND == result.status_code
