@@ -1,53 +1,53 @@
 import random
 import requests
+import yaml
+import os
+import sys
 
 from http import HTTPStatus
 from flask import Flask, request
 
 loadbalancer = Flask(__name__)
 
-DOG_SERVERS = ["localhost:8081", "localhost:8082"]
-CAT_SERVERS = ["localhost:9081", "localhost:9082"]
+
+def load_configuration(path):
+  with open(path) as config_file:
+    config = yaml.load(config_file, Loader=yaml.FullLoader)
+  return config
+
+try:
+  config = load_configuration("loadbalancer.yml")
+except FileNotFoundError:
+  print("Please provide a configuration file")
+  sys.exit(-1)
 
 
 @loadbalancer.route("/")
-def router():
+def host_router():
   """[summary]
 
   Returns:
       [type]: [description]
   """
   host_header = request.headers["Host"]
-  
-  if host_header == "www.service-a.com":
-    response = requests.get(f"http://{random.choice(DOG_SERVERS)}")
-    return response.content, response.status_code
-  
-  elif host_header == "www.service-b.com":
-    response = requests.get(f"http://{random.choice(CAT_SERVERS)}")
-    return response.content, response.status_code
-  
+  for entry in config["hosts"]:
+    if host_header == entry["host"]:
+      response = requests.get(f"http://{random.choice(entry['servers'])}")
+      return response.content, response.status_code
   else:
     return "Not Found", HTTPStatus.NOT_FOUND
 
 
-@loadbalancer.route("/dogs")
-def dogs():
+@loadbalancer.route("/<path>")
+def path_router(path):
   """[summary]
 
   Returns:
       [type]: [description]
   """
-  response = requests.get(f"http://{random.choice(DOG_SERVERS)}")
-  return response.content, response.status_code
+  for entry in config["paths"]:
+    if ("/" + path) == entry["path"]:
+      response = requests.get(f"http://{random.choice(entry['servers'])}")
+      return response.content, response.status_code
 
-
-@loadbalancer.route("/cats")
-def cats():
-  """[summary]
-
-  Returns:
-      [type]: [description]
-  """
-  response = requests.get(f"http://{random.choice(CAT_SERVERS)}")
-  return response.content, response.status_code
+  return "Not Found", HTTPStatus.NOT_FOUND

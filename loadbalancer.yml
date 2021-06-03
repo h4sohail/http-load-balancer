@@ -1,0 +1,19 @@
+hosts:
+  - host: www.dogs.com
+    servers:
+      - localhost:8081
+      - localhost:8082
+  - host: www.cats.com
+    servers:
+      - localhost:9081
+      - localhost:9082
+
+paths: 
+  - path: /dogs
+    servers:
+      - localhost:8081
+      - localhost:8082
+  - path: /cats
+    servers:
+      - localhost:9081
+      - localhost:9082
