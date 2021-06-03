@@ -1,7 +1,10 @@
 FROM python:3
 
-COPY . .
+RUN mkdir app
 
-RUN pip install -r requirements.txt
+COPY /tests/fixtures/mock_api.py  app/
+COPY /tests/fixtures/requirements.txt app/ 
 
-CMD ["python", "/tests/fixtures/mock_api.py"]
+RUN cd app && pip install -r requirements.txt
+
+CMD ["python", "app/mock_api.py"]
