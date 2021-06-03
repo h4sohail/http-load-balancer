@@ -11,12 +11,12 @@ def client():
 
 
 def test_host_routing_dogs(client):
-  result = client.get("/", headers={"Host": "www.service-a.com"})
+  result = client.get("/", headers={"Host": "www.dogs.com"})
   assert b"This is the dogs application" in result.data
 
 
 def test_host_routing_cats(client):
-  result = client.get("/", headers={"Host": "www.service-b.com"})
+  result = client.get("/", headers={"Host": "www.cats.com"})
   assert b"This is the cats application" in result.data
 
 
